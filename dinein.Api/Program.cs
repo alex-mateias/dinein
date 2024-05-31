@@ -1,8 +1,10 @@
-using dinein.Application.Services.Authentication;
+using dinein.Application;
+using dinein.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
