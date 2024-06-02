@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using dinein.Application.Common.Interfaces.Authentication;
+using dinein.Infrastructure.Authentication;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace dinein.Infrastructure
 {
@@ -6,6 +8,7 @@ namespace dinein.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
+            services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
             return services;
         }
     }
