@@ -1,5 +1,4 @@
-﻿using dinein.Api.Filters;
-using dinein.Application.Services.Authentication;
+﻿using dinein.Application.Services.Authentication;
 using dinein.Contracts.Authentication;
 using Microsoft.AspNetCore.Mvc;
 

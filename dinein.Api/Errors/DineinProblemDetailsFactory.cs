@@ -11,11 +11,6 @@ namespace dinein.Api.Errors
         private readonly ApiBehaviorOptions _options;
         private readonly Action<ProblemDetailsContext>? _configure;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DineinProblemDetailsFactory"/> class.
-        /// </summary>
-        /// <param name="options">The options for API behavior.</param>
-        /// <param name="problemDetailsOptions">The options for customizing problem details.</param>
         public DineinProblemDetailsFactory(
             IOptions<ApiBehaviorOptions> options,
             IOptions<ProblemDetailsOptions>? problemDetailsOptions = null)
