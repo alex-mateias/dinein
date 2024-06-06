@@ -1,24 +1,37 @@
+using dinein.Api.Errors;
 using dinein.Application;
 using dinein.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddApplication();
-builder.Services.AddInfrastructure(builder.Configuration);
-
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    builder.Services
+        .AddApplication()
+        .AddInfrastructure(builder.Configuration);
+
+    // builder.Services.AddControllers(options => options.Filters.Add<ErrorHandlingFilterAttribute>());
+    builder.Services.AddControllers();
+
+    builder.Services.AddSingleton<ProblemDetailsFactory, DineinProblemDetailsFactory>();
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
 }
 
-app.UseHttpsRedirection();
-app.MapControllers();
+var app = builder.Build();
+{
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+        app.UseExceptionHandler("/error");
+    }
+    else
+    {
+       app.UseExceptionHandler("/error");
+    }
 
-app.Run();
+    app.UseHttpsRedirection();
+    app.MapControllers();
+
+    app.Run();
+}
