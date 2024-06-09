@@ -1,6 +1,8 @@
 ﻿using dinein.Application.Common.Interfaces.Authentication;
 using dinein.Application.Common.Interfaces.Persistence;
+using dinein.Domain.Common.Errors;
 using dinein.Domain.Entities;
+using ErrorOr;
 
 namespace dinein.Application.Services.Authentication
 {
@@ -15,16 +17,16 @@ namespace dinein.Application.Services.Authentication
             _userRepository = userRepository;
         }
 
-        public AuthenticationResult Login(string email, string password)
+        public ErrorOr<AuthenticationResult> Login(string email, string password)
         {
             if (_userRepository.GetUserByEmail(email) is not User user)
             {
-                throw new Exception("User with this email does not exist");
+                return Errors.Authentication.InvalidCredentials;
             }
 
             if (user.Password != password)
             {
-                throw new Exception("Invalid password");
+                return Errors.Authentication.InvalidCredentials;
             }
 
             var token = _jwtTokenGenerator.GenerateToken(user);
@@ -34,11 +36,11 @@ namespace dinein.Application.Services.Authentication
                 token);
         }
 
-        public AuthenticationResult Register(string firstName, string lastName, string email, string password)
+        public ErrorOr<AuthenticationResult> Register(string firstName, string lastName, string email, string password)
         {
             if (_userRepository.GetUserByEmail(email) is not null)
             {
-                throw new Exception("User with this email already exists");
+                return Errors.User.DuplicateEmail;
             }
 
             var user = new User
