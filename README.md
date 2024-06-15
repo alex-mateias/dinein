@@ -37,7 +37,7 @@ A comprehensive REST API built from scratch, following Clean Architecture and Do
 - .NET CLI
 
 ## Inspiration
-This repository follows a course from YouTube: [Clean Architecture Course](https://www.youtube.com/watch?v=fhM0V2N1GpY&list=PLzYkqgWkHPKBcDIP5gzLfASkQyTdy0t4k&index=1&t=0s).
+This repository follows a course from Amichai Mantinband: [Clean Architecture Course](https://www.youtube.com/watch?v=fhM0V2N1GpY&list=PLzYkqgWkHPKBcDIP5gzLfASkQyTdy0t4k&index=1&t=0s).
 
 ## Getting Started
 
